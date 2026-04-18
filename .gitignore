@@ -1,0 +1,21 @@
+# Data
+data/
+split_data/
+
+# Results (modeller büyük olabilir)
+results/
+*.keras
+*.h5
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kaggle
+kaggle.json
