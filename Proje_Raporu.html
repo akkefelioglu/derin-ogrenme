@@ -162,6 +162,11 @@ Veri seti, eğitim ve doğrulama olmak üzere iki alt kümeye ayrılmıştır.</
   <tr><td>Doğrulama (valid)</td><td>223</td><td>Model değerlendirmesi için kullanılan görüntüler</td></tr>
 </table>
 
+<div class="center">
+  <img src="samples.png" alt="Örnek Görüntüler" style="max-width: 90%; height: auto; border-radius: 8px; margin: 15px 0;">
+  <p><em>Şekil 1: Eğitim veri setinden örnek MR görüntüleri ve etiketleri.</em></p>
+</div>
+
 <div class="subsection-title">3.1. Sınıf Bilgileri</div>
 
 <table>
@@ -172,6 +177,11 @@ Veri seti, eğitim ve doğrulama olmak üzere iki alt kümeye ayrılmıştır.</
 
 <p>Veri seti YOLO formatında etiketlenmiş olup, her görüntü için bir .txt etiket dosyası bulunmaktadır. 
 Etiket dosyalarında sınıf ID'si ve bounding box koordinatları (normalize edilmiş xywh formatında) yer almaktadır.</p>
+
+<div class="center">
+  <img src="class_dist.png" alt="Sınıf Dağılımı" style="max-width: 80%; height: auto; border-radius: 8px; margin: 15px 0;">
+  <p><em>Şekil 2: Eğitim ve doğrulama setlerindeki sınıf dağılımı grafiği.</em></p>
+</div>
 
 <div class="section-title">4. Yöntem</div>
 
@@ -281,6 +291,11 @@ names:
   <tr><td>mAP@0.5:0.95</td><td><strong>0.3519</strong></td></tr>
 </table>
 
+<div class="center">
+  <img src="results.png" alt="Eğitim Grafikleri" style="max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0;">
+  <p><em>Şekil 3: Eğitim süreci boyunca loss (kayıp) ve metriklerin değişimi.</em></p>
+</div>
+
 <div class="subsection-title">5.3. Karışıklık Matrisi Analizi</div>
 
 <p>
@@ -288,6 +303,11 @@ Karışıklık matrisi, modelin sınıflandırma performansını detaylı olarak
 Matrisin köşegen elemanları doğru tahminleri, köşegen dışı elemanlar ise yanlış tahminleri temsil eder.
 Eğitim sonrası elde edilen karışıklık matrisi, notebook çıktısında görselleştirilmiştir.
 </p>
+
+<div class="center">
+  <img src="cm.png" alt="Karışıklık Matrisi" style="max-width: 60%; height: auto; border-radius: 8px; margin: 15px 0;">
+  <p><em>Şekil 4: Doğrulama seti üzerinde elde edilen Karışıklık Matrisi (Confusion Matrix).</em></p>
+</div>
 
 <div class="subsection-title">5.4. Modelin Güvenilirliği Analizi</div>
 
@@ -314,6 +334,17 @@ Tıbbi görüntü analizinde <strong>yüksek recall</strong> (duyarlılık) değ
 bir tümörü kaçırmak (yanlış negatif), yanlış alarm vermekten (yanlış pozitif) çok daha tehlikelidir. 
 Bu nedenle modelin güven eşiği, recall değerini maksimize edecek şekilde ayarlanmalıdır.
 </p>
+
+<div class="subsection-title">5.5. Örnek Tahminler (Inference)</div>
+
+<p>
+Eğitilen model, daha önce görmediği doğrulama seti (validation set) görüntüleri üzerinde test edilmiş ve başarılı bir şekilde tümörleri tespit edebildiği görülmüştür.
+</p>
+
+<div class="center">
+  <img src="inference.png" alt="Örnek Tahminler" style="max-width: 90%; height: auto; border-radius: 8px; margin: 15px 0;">
+  <p><em>Şekil 5: Eğitilmiş YOLOv8n modelinin MR görüntüleri üzerindeki tespit örnekleri.</em></p>
+</div>
 
 <div class="section-title">6. Sonuç ve Tartışma</div>
 
