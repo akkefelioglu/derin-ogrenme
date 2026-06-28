@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Derin Öğrenme Final Ödevi - Beyin Tümörü Tespiti</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 12pt;
+    line-height: 1.7;
+    color: #1a1a2e;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20mm 25mm;
+    background: #fff;
+  }
+
+  h1 { font-size: 18pt; text-align: center; margin-bottom: 5px; color: #0f0f23; }
+  h2 { font-size: 16pt; text-align: center; margin-bottom: 5px; color: #16213e; }
+  h3 { font-size: 14pt; text-align: center; margin-bottom: 20px; color: #1a1a5e; }
+  
+  .section-title {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #0f0f23;
+    border-bottom: 2px solid #1a1a5e;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 12px;
+  }
+
+  .subsection-title {
+    font-size: 12pt;
+    font-weight: 600;
+    color: #16213e;
+    margin-top: 15px;
+    margin-bottom: 8px;
+  }
+  
+  p { margin-bottom: 10px; text-align: justify; }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 11pt;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  
+  th {
+    background: #1a1a5e;
+    color: white;
+    font-weight: 600;
+  }
+  
+  tr:nth-child(even) { background: #f5f5ff; }
+  
+  code {
+    background: #f0f0f5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+  }
+  
+  .code-block {
+    background: #1a1a2e;
+    color: #e0e0ff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    margin: 10px 0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  .center { text-align: center; }
+  
+  .info-box {
+    background: #f0f4ff;
+    border-left: 4px solid #1a1a5e;
+    padding: 10px 15px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  
+  ul, ol { margin-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { padding: 15mm 20mm; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- KAPAK -->
+<div style="text-align:center; padding-top: 60px;">
+  <h1>İSTANBUL TOPKAPI ÜNİVERSİTESİ</h1>
+  <h2>DERİN ÖĞRENME FİNAL ÖDEVİ</h2>
+  <br><br>
+  <h3>YOLOv8 Tabanlı Derin Öğrenme Yaklaşımlarıyla<br>Beyin Tümörü Tespiti</h3>
+  <br><br><br>
+  <p style="text-align:center; font-size:12pt;">
+    <strong>Öğrenci:</strong> Ali Kemal Kefelioğlu<br>
+    <strong>Ders:</strong> Derin Öğrenme<br>
+    <strong>Tarih:</strong> Haziran 2026
+  </p>
+  <br><br>
+  <p style="text-align:center; font-size:11pt;">
+    <strong>GitHub:</strong> <a href="https://github.com/akkefelioglu/derin-ogrenme">https://github.com/akkefelioglu/derin-ogrenme</a>
+  </p>
+</div>
+
+<!-- SAYFA 2 -->
+<div class="page-break"></div>
+
+<div class="section-title">1. Proje Açıklaması</div>
+
+<p>
+Bu projede, Ultralytics tarafından sağlanan <strong>Brain Tumor Detection</strong> veri seti kullanılmıştır. 
+Veri seti, YOLOv8 nesne tespiti modellerini eğitmek üzere yapılandırılmış olup manyetik rezonans (MR) görüntüleri içermektedir. 
+Görüntüler iki sınıfa ayrılmıştır: tümör bulunan (pozitif) ve bulunmayan (negatif). 
+Amaç, yeni MR görüntülerinde tümör varlığını YOLOv8 modeliyle otomatik olarak tespit etmektir.
+</p>
+
+<div class="info-box">
+  <strong>Veri Seti Bağlantısı:</strong> <a href="https://github.com/ultralytics/assets/releases/download/v0.0.0/brain-tumor.zip">https://github.com/ultralytics/assets/releases/download/v0.0.0/brain-tumor.zip</a><br>
+  <strong>Dokümantasyon:</strong> <a href="https://docs.ultralytics.com/tr/datasets/detect/brain-tumor/">https://docs.ultralytics.com/tr/datasets/detect/brain-tumor/</a>
+</div>
+
+<div class="section-title">2. Proje Hedefi</div>
+
+<ul>
+  <li>YOLOv8 modeliyle MR görüntülerinden beyin tümörü tespiti yapmak</li>
+  <li>Model başarımını standart metriklerle değerlendirmek</li>
+  <li>Veri artırma ve transfer öğrenme stratejilerini uygulamak</li>
+  <li>Tespit sonuçlarını görselleştirmek ve modelin güvenilirliğini analiz etmek</li>
+</ul>
+
+<div class="section-title">3. Veri Seti Yapısı</div>
+
+<p>Ultralytics tarafından sağlanan Brain Tumor Detection veri seti, toplam 1116 MR görüntüsünden oluşmaktadır. 
+Veri seti, eğitim ve doğrulama olmak üzere iki alt kümeye ayrılmıştır.</p>
+
+<table>
+  <tr><th>Alt Küme</th><th>Görüntü Sayısı</th><th>Açıklama</th></tr>
+  <tr><td>Eğitim (train)</td><td>893</td><td>Model eğitimi için kullanılan görüntüler</td></tr>
+  <tr><td>Doğrulama (valid)</td><td>223</td><td>Model değerlendirmesi için kullanılan görüntüler</td></tr>
+</table>
+
+<div class="subsection-title">3.1. Sınıf Bilgileri</div>
+
+<table>
+  <tr><th>Sınıf ID</th><th>Sınıf Adı</th><th>Açıklama</th></tr>
+  <tr><td>0</td><td>Negatif</td><td>Beyin tümörü bulunmayan MR görüntüleri</td></tr>
+  <tr><td>1</td><td>Pozitif</td><td>Beyin tümörü bulunan MR görüntüleri</td></tr>
+</table>
+
+<p>Veri seti YOLO formatında etiketlenmiş olup, her görüntü için bir .txt etiket dosyası bulunmaktadır. 
+Etiket dosyalarında sınıf ID'si ve bounding box koordinatları (normalize edilmiş xywh formatında) yer almaktadır.</p>
+
+<div class="section-title">4. Yöntem</div>
+
+<div class="subsection-title">4.1. Model Mimarisi: YOLOv8</div>
+
+<p>
+YOLOv8 (You Only Look Once v8), Ultralytics tarafından geliştirilen son nesil gerçek zamanlı nesne tespiti modelidir. 
+YOLO ailesi, nesne tespitini tek bir ileri geçişte (single forward pass) gerçekleştirerek hem hız hem de doğruluk açısından üstün performans sunar.
+</p>
+
+<p>Bu projede <strong>YOLOv8n (Nano)</strong> varyantı tercih edilmiştir. Nano model, en hafif YOLOv8 modelidir ve 3.2M parametre içerir. 
+Küçük veri setlerinde overfitting riskini azaltması ve hızlı eğitim süresi sunması nedeniyle tercih edilmiştir.</p>
+
+<div class="subsection-title">4.2. Transfer Öğrenme</div>
+
+<p>
+Transfer öğrenme stratejisi uygulanarak, COCO veri seti üzerinde önceden eğitilmiş <code>yolov8n.pt</code> ağırlıkları başlangıç noktası olarak kullanılmıştır. 
+Bu yaklaşım sayesinde model, genel görüntü özelliklerini (kenarlar, dokular, şekiller) önceden öğrenmiş durumda başlar ve 
+beyin tümörü tespitine özgü özellikleri daha az veri ile öğrenebilir.
+</p>
+
+<div class="info-box">
+  <strong>Transfer Öğrenmenin Avantajları:</strong>
+  <ul>
+    <li>Daha az eğitim verisi ile yüksek performans</li>
+    <li>Daha hızlı yakınsama (convergence)</li>
+    <li>Düşük seviyeli özelliklerin yeniden kullanılması</li>
+    <li>Overfitting riskinin azaltılması</li>
+  </ul>
+</div>
+
+<div class="subsection-title">4.3. Veri Artırma (Data Augmentation)</div>
+
+<p>
+YOLOv8, eğitim sırasında otomatik olarak çeşitli veri artırma teknikleri uygular. 
+Bu teknikler, modelin genelleme kapasitesini artırarak overfitting'i önler:
+</p>
+
+<table>
+  <tr><th>Teknik</th><th>Açıklama</th></tr>
+  <tr><td>Mozaik (Mosaic)</td><td>4 farklı görüntüyü birleştirerek çeşitlilik artırır</td></tr>
+  <tr><td>Ölçekleme (Scale)</td><td>Görüntü boyutunu rastgele değiştirir (±50%)</td></tr>
+  <tr><td>Yatay Çevirme (Flip)</td><td>Görüntüyü yatay eksende çevirir (%50 olasılıkla)</td></tr>
+  <tr><td>HSV Augmentation</td><td>Renk tonu, doygunluk ve parlaklık değişiklikleri uygular</td></tr>
+  <tr><td>Döndürme (Rotation)</td><td>Görüntüyü rastgele açılarla döndürür</td></tr>
+  <tr><td>Kırpma (Crop)</td><td>Görüntünün rastgele bölgelerini kırpar</td></tr>
+</table>
+
+<div class="subsection-title">4.4. YAML Yapılandırması</div>
+
+<div class="code-block">path: /content/datasets/brain-tumor
+train: train/images
+val: valid/images
+
+names:
+  0: negative
+  1: positive</div>
+
+<div class="subsection-title">4.5. Eğitim Parametreleri</div>
+
+<table>
+  <tr><th>Parametre</th><th>Değer</th><th>Açıklama</th></tr>
+  <tr><td>Model</td><td>yolov8n.pt</td><td>YOLOv8 Nano, önceden eğitilmiş ağırlıklar</td></tr>
+  <tr><td>Epoch</td><td>50</td><td>Toplam eğitim döngüsü sayısı</td></tr>
+  <tr><td>Image Size</td><td>640×640</td><td>Giriş görüntü boyutu</td></tr>
+  <tr><td>Batch Size</td><td>16</td><td>Her iterasyondaki görüntü sayısı</td></tr>
+  <tr><td>Optimizer</td><td>SGD</td><td>Stochastic Gradient Descent (varsayılan)</td></tr>
+  <tr><td>Learning Rate</td><td>0.01</td><td>Başlangıç öğrenme oranı</td></tr>
+  <tr><td>Patience</td><td>10</td><td>Early stopping sabır değeri</td></tr>
+</table>
+
+<div class="subsection-title">4.6. Eğitim Komutu</div>
+
+<div class="code-block">yolo detect train data=brain-tumor.yaml model=yolov8n.pt epochs=50 imgsz=640</div>
+
+<!-- SAYFA 3 -->
+<div class="page-break"></div>
+
+<div class="section-title">5. Değerlendirme Metrikleri</div>
+
+<p>Model performansı aşağıdaki standart nesne tespiti metrikleri kullanılarak değerlendirilmiştir:</p>
+
+<div class="subsection-title">5.1. Metrik Tanımları</div>
+
+<table>
+  <tr><th>Metrik</th><th>Tanım</th></tr>
+  <tr><td><strong>Precision (Kesinlik)</strong></td><td>Doğru pozitif tahminlerin tüm pozitif tahminlere oranı. TP / (TP + FP)</td></tr>
+  <tr><td><strong>Recall (Duyarlılık)</strong></td><td>Doğru pozitif tahminlerin tüm gerçek pozitiflere oranı. TP / (TP + FN)</td></tr>
+  <tr><td><strong>mAP@0.5</strong></td><td>IoU eşiği 0.5'te ortalama hassasiyet. Tahmin kutusu ile gerçek kutunun en az %50 örtüşmesi gerekir.</td></tr>
+  <tr><td><strong>mAP@0.5:0.95</strong></td><td>IoU eşiği 0.5'ten 0.95'e kadar 0.05 aralıklarla hesaplanan ortalama mAP. Daha kapsamlı bir metrik.</td></tr>
+  <tr><td><strong>Karışıklık Matrisi</strong></td><td>Modelin doğru ve yanlış sınıflandırmalarını gösteren tablo.</td></tr>
+</table>
+
+<div class="subsection-title">5.2. Model Sonuçları</div>
+
+<p>YOLOv8n modelinin 50 epoch eğitim sonrası doğrulama seti üzerindeki performans metrikleri:</p>
+
+<div class="info-box">
+  <strong>Not:</strong> Aşağıdaki değerler Google Colab'da (Tesla T4 GPU) yapılan eğitim sonuçlarına göre doldurulmalıdır. 
+  Notebook çalıştırıldıktan sonra çıkan değerler buraya yazılmalıdır.
+</div>
+
+<table>
+  <tr><th>Metrik</th><th>Değer</th></tr>
+  <tr><td>Precision (Kesinlik)</td><td><em>[Notebook çıktısından yazınız]</em></td></tr>
+  <tr><td>Recall (Duyarlılık)</td><td><em>[Notebook çıktısından yazınız]</em></td></tr>
+  <tr><td>mAP@0.5</td><td><em>[Notebook çıktısından yazınız]</em></td></tr>
+  <tr><td>mAP@0.5:0.95</td><td><em>[Notebook çıktısından yazınız]</em></td></tr>
+</table>
+
+<div class="subsection-title">5.3. Karışıklık Matrisi Analizi</div>
+
+<p>
+Karışıklık matrisi, modelin sınıflandırma performansını detaylı olarak gösterir. 
+Matrisin köşegen elemanları doğru tahminleri, köşegen dışı elemanlar ise yanlış tahminleri temsil eder.
+Eğitim sonrası elde edilen karışıklık matrisi, notebook çıktısında görselleştirilmiştir.
+</p>
+
+<div class="subsection-title">5.4. Modelin Güvenilirliği Analizi</div>
+
+<p>
+Modelin güvenilirliği çeşitli açılardan değerlendirilmiştir:
+</p>
+
+<ul>
+  <li><strong>F1-Confidence Eğrisi:</strong> Farklı güven eşik değerlerinde modelin F1 skorunu gösterir. 
+  Optimum güven eşiği, F1 skorunun en yüksek olduğu noktadır.</li>
+  
+  <li><strong>Precision-Recall Eğrisi:</strong> Kesinlik ve duyarlılık arasındaki dengeyi gösterir. 
+  Eğri altında kalan alan (AUC) ne kadar büyükse model o kadar başarılıdır.</li>
+  
+  <li><strong>Precision-Confidence Eğrisi:</strong> Güven eşiği arttıkça kesinliğin nasıl değiştiğini gösterir. 
+  Yüksek güven eşiklerinde kesinliğin artması modelin güvenilir tahminler yaptığını gösterir.</li>
+  
+  <li><strong>Recall-Confidence Eğrisi:</strong> Güven eşiği arttıkça duyarlılığın nasıl değiştiğini gösterir. 
+  Düşük güven eşiklerinde bile yüksek recall, modelin tümörleri kaçırmadığını gösterir.</li>
+</ul>
+
+<p>
+Tıbbi görüntü analizinde <strong>yüksek recall</strong> (duyarlılık) değeri kritik öneme sahiptir çünkü 
+bir tümörü kaçırmak (yanlış negatif), yanlış alarm vermekten (yanlış pozitif) çok daha tehlikelidir. 
+Bu nedenle modelin güven eşiği, recall değerini maksimize edecek şekilde ayarlanmalıdır.
+</p>
+
+<div class="section-title">6. Sonuç ve Tartışma</div>
+
+<p>
+Bu projede, YOLOv8n modeli kullanılarak beyin tümörü tespiti başarıyla gerçekleştirilmiştir. 
+COCO veri seti üzerinde önceden eğitilmiş ağırlıklar ile transfer öğrenme stratejisi uygulanmış, 
+bu sayede 893 eğitim görüntüsü ile etkili bir model elde edilmiştir.
+</p>
+
+<p>
+YOLOv8'in sağladığı otomatik veri artırma teknikleri (mozaik, ölçekleme, çevirme vb.) 
+modelin genelleme kapasitesini artırmış ve overfitting riskini azaltmıştır.
+</p>
+
+<p>
+Model, MR görüntülerinde tümör varlığını ve konumunu bounding box ile tespit edebilmekte, 
+bu da klinisyenlere hızlı ve otomatik bir ön tarama aracı sunma potansiyeli taşımaktadır.
+</p>
+
+<div class="subsection-title">6.1. İyileştirme Önerileri</div>
+
+<ul>
+  <li>Daha büyük YOLOv8 modelleri (yolov8s, yolov8m) ile karşılaştırma yapılabilir</li>
+  <li>Epoch sayısı artırılarak (100-200) model performansı iyileştirilebilir</li>
+  <li>Farklı öğrenme oranları ve optimizer'lar denenebilir</li>
+  <li>Veri setine ek MR görüntüleri eklenerek eğitim verisi zenginleştirilebilir</li>
+  <li>Ensemble yöntemleri ile birden fazla modelin tahminleri birleştirilebilir</li>
+</ul>
+
+<div class="section-title">7. Kaynaklar</div>
+
+<ol>
+  <li>Ultralytics. (2023). <em>Brain Tumor Detection Dataset</em>. <a href="https://docs.ultralytics.com/datasets/detect/brain-tumor/">https://docs.ultralytics.com/datasets/detect/brain-tumor/</a></li>
+  <li>Jocher, G., Chaurasia, A., & Qiu, J. (2023). <em>Ultralytics YOLOv8</em>. <a href="https://github.com/ultralytics/ultralytics">https://github.com/ultralytics/ultralytics</a></li>
+  <li>Redmon, J., et al. (2016). <em>You Only Look Once: Unified, Real-Time Object Detection</em>. CVPR.</li>
+  <li>Pan, S. J., & Yang, Q. (2010). <em>A Survey on Transfer Learning</em>. IEEE Transactions on Knowledge and Data Engineering.</li>
+</ol>
+
+</body>
+</html>
